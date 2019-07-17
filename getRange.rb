@@ -1,27 +1,17 @@
-def getRange(arr, target)
-  output=[-1, -1]
-
-  initLength = arr.length
-  initLength.times.with_index do |x, i|
-    if arr.pop == target
-      output[1] = initLength - i -1
-      break
-    end
+def getRangeEach(arr, target)
+  output = []
+  arr.each_with_index { |x, i| output << i if x == target }
+  if output.any?
+    [output[0], output[-1]]
+  else
+    [-1, -1]
   end
-
-  secLength = arr.length
-  initLength.times.with_index do |x, i|
-    if arr.shift == target
-      output[0] = i
-      break
-    end
-  end
-
-  output
+  # output.any? ? [output[0], output[-1]] : [-1, -1]
 end
 
-
 A = [1,3,3,5,7,8,9,9,9,15]
-target = 9
+target = 12
 # Output: [6,8]
-getRange(A, target)
+
+print getRangeEach(A, target)
+puts
